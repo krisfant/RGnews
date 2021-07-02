@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="com.woodmoon.mapping.userMapper"就是com.woodmoon.mapping(包名)+NewsMapper(NewsMapper.xml文件去除后缀)-->
+<mapper namespace="com.rgnews.dao.NewsMapperDao">
+
+
+    <resultMap id="NewsMap" type="com.rgnews.model.NewsDo">
+        <id property="news_id" column="news_id" javaType="java.lang.Integer"></id>
+        <result property="news_state" column="news_state" javaType="java.lang.Integer"></result>
+        <result property="news_date" column="news_date" javaType="date"></result>
+        <result property="news_title" column="news_title" javaType="java.lang.String"></result>
+        <result property="news_content" column="news_content" javaType="java.lang.String"></result>
+        <result property="news_photo" column="news_photo" javaType="java.lang.String"></result>
+    </resultMap>
+
+
+
+
+    <!--新增新闻-->
+    <insert id="insertNews" useGeneratedKeys="true" keyProperty="news_id">
+        insert into test_news (news_state,news_date,news_title,news_content,news_photo) values (#{news_state},#{news_date},#{news_title},#{news_content},#{news_photo})
+    </insert>
+
+    <!--删除新闻-->
+    <delete id="deleteNews" parameterType="int">
+        delete from test_news where news_id=#{news_id}
+    </delete>
+
+    <!--修改新闻-->
+    <update id="updateNews" parameterType="Map">
+        update test_news set news_state=#{news_state},news_date=#{news_date},news_title=#{news_title},news_content=#{news_content},news_photo=#{news_photo}
+        where news_id=#{news_id}
+    </update>
+
+
+
+
+    <!--    查询所有新闻-->
+    <select id="test" resultType="com.rgnews.model.NewsDo">
+        select * from test_news where news_id='1'
+    </select>
+
+    <select id="getAllNews" resultMap="NewsMap">
+        select * from test_news
+    </select>
+    <!-- 创建对应news实体类的位置 -->
+    <!-- 根据条件查询得到一个news对象-->
+    <select id="getNewsById" parameterType="int" resultType="com.rgnews.model.NewsDo">
+        select * from test_news where news_id=#{news_id}
+    </select>
+    <select id="getNewsByDate" parameterType="date" resultType="com.rgnews.model.NewsDo">
+        select * from test_news where DATE_FORMAT(news_date,'%Y-%m-%d') = '2021-06-03'
+    </select>
+    <select id="getNewsByTitle" parameterType="String" resultType="com.rgnews.model.NewsDo">
+        select * from test_news where news_title like CONCAT('%',#{news_title},'%')
+    </select>
+    <select id="getNewsByState" parameterType="int" resultType="com.rgnews.model.NewsDo">
+        select * from test_news where news_state=#{news_state}
+    </select>
+
+</mapper>
