@@ -32,19 +32,6 @@ public class NewsControl {
 
     }
 
-    @RequestMapping(value = "login")
-    @ResponseBody
-    public int login(String userName,String psw){
-
-        if(userName.equals("admin")&&psw.equals("abc")){
-            return 1;
-
-        }
-        else {
-            return 0;
-        }
-
-    }
 
     @PostMapping(value = "insertNews")
     @ResponseBody

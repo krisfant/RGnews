@@ -70,5 +70,4 @@ public class NewsServiceimpl implements NewsService{
         return  newsList;
     }
 
-
 }

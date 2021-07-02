@@ -3,7 +3,6 @@ package com.rgnews.service;
 import java.util.Date;
 import java.util.List;
 import com.rgnews.model.NewsDo;
-import org.springframework.stereotype.Service;
 
 
 public interface NewsService {
@@ -26,4 +25,6 @@ public interface NewsService {
     List<NewsDo> getNewsByDate(Date news_date);
     List<NewsDo> getNewsByTitle(String news_title);//模糊查询
     List<NewsDo> getNewsByState(int news_state);
+
+
 }
