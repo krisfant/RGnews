@@ -1,6 +1,7 @@
 package com.rgnews.control;
 
 import com.rgnews.model.NewsDo;
+import com.rgnews.model.Result;
 import com.rgnews.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/news/")
+@RequestMapping(value = "/")
 public class NewsControl {
 
 
@@ -20,15 +21,17 @@ public class NewsControl {
 
     @PostMapping(value = "test")
     @ResponseBody
-    public NewsDo test(){
-        NewsDo a =new NewsDo() ;
+    public Result test(){
+        Result result =new Result() ;
+        NewsDo newsDo = new NewsDo();
         try{
-        a = newsService.test();
+        newsDo = newsService.test();
+        return result.success(newsDo);
         }
         catch (Exception e){
             e.printStackTrace();
+            return result.failed();
         }
-        return  a;
 
     }
 
