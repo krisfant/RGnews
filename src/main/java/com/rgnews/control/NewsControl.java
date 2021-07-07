@@ -5,7 +5,7 @@ import com.rgnews.model.Result;
 import com.rgnews.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -66,7 +66,7 @@ public class NewsControl {
     @PostMapping(value = "getAllNews")
     @ResponseBody
     public Result getAllNews(){
-        List<NewsDo> newsDoList = new ArrayList();
+        List<NewsDo> newsDoList;
         Result result =new Result() ;
         try{
             newsDoList = newsService.getAllNews();
@@ -91,7 +91,7 @@ public class NewsControl {
     @ResponseBody
     public Result getNewsById( @RequestParam int news_id){
 
-        List<NewsDo> newsDoList = new ArrayList();
+        List<NewsDo> newsDoList;
         Result result =new Result() ;
         try{
             newsDoList = newsService.getNewsById(news_id);
@@ -113,7 +113,7 @@ public class NewsControl {
     @PostMapping(value = "getNewsByDate")
     @ResponseBody
     public Result getNewsByDate(@RequestParam Date news_date){
-        List<NewsDo> newsDoList = new ArrayList();
+        List<NewsDo> newsDoList;
         Result result =new Result() ;
         try{
             newsDoList = newsService.getNewsByDate(news_date);
@@ -134,7 +134,7 @@ public class NewsControl {
     @PostMapping(value = "getNewsByTitle")
     @ResponseBody
     public Result getNewsByTitle(String news_title){
-        List<NewsDo> newsDoList = new ArrayList();
+        List<NewsDo> newsDoList ;
         Result result =new Result() ;
         try{
             newsDoList = newsService.getNewsByTitle(news_title);
@@ -155,7 +155,7 @@ public class NewsControl {
     @PostMapping(value = "getNewsByState")
     @ResponseBody
     public Result getNewsByState(int news_state){
-        List<NewsDo> newsDoList = new ArrayList();
+        List<NewsDo> newsDoList;
         Result result =new Result() ;
         try{
             newsDoList = newsService.getNewsByState(news_state);
