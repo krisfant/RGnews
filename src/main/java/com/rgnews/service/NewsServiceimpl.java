@@ -21,24 +21,24 @@ public class NewsServiceimpl implements NewsService{
 
     @Override
     public void insertNews(NewsDo newsDo){
+        Date date = new Date();
+        newsDo.setUpdate_time(date);
         newsMapper.insertNews(newsDo);
     }
 
     @Override
     public void deleteNews(int news_id){
+
         newsMapper.deleteNews(news_id);
     }
 
     @Override
     public void updateNews(NewsDo newsDo) {
+        Date date = new Date();
+        newsDo.setUpdate_time(date);
         newsMapper.updateNews(newsDo);
     }
 
-    @Override
-    public NewsDo test(){
-        NewsDo a = newsMapper.test();
-        return a;
-    }
 
     @Override
     public List<NewsDo> getAllNews(){

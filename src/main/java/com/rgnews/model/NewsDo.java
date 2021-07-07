@@ -14,6 +14,7 @@ public class NewsDo {
     private int news_id;
     private int news_state;
     private Date news_date;
+    private Date update_time;
     private String news_title;
     private String news_content;
     private String news_photo;

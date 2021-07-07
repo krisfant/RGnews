@@ -7,7 +7,7 @@ import com.rgnews.model.NewsDo;
 
 public interface NewsService {
 
-    NewsDo test();
+
 
     //增
     void insertNews(NewsDo newsDo);

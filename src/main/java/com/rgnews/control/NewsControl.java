@@ -19,14 +19,65 @@ public class NewsControl {
     private NewsService newsService;
 
 
-    @PostMapping(value = "test")
+    @PostMapping(value = "insertNews")
     @ResponseBody
-    public Result test(){
+    public Result insertNews(NewsDo newsDo){
         Result result =new Result() ;
-        NewsDo newsDo = new NewsDo();
         try{
-        newsDo = newsService.test();
-        return result.success(newsDo);
+            newsService.insertNews(newsDo);
+            return result.success();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return result.failed();
+        }
+    }
+
+    @DeleteMapping(value = "deleteNews")
+    @ResponseBody
+    public Result deleteNews(int news_id){
+        Result result =new Result() ;
+        try{
+            newsService.deleteNews(news_id);
+            return result.success();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return result.failed();
+        }
+
+    }
+
+    @PostMapping(value = "updateNews")
+    @ResponseBody
+    public Result updateNews(NewsDo newsDo){
+        Result result =new Result() ;
+        try{
+            newsService.updateNews(newsDo);
+            return result.success();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return result.failed();
+        }
+
+    }
+
+    @PostMapping(value = "getAllNews")
+    @ResponseBody
+    public Result getAllNews(){
+        List<NewsDo> newsDoList = new ArrayList();
+        Result result =new Result() ;
+        try{
+            newsDoList = newsService.getAllNews();
+            if(newsDoList!=null && !newsDoList.isEmpty())
+               {
+                   return result.success(newsDoList);
+               }else
+               {
+                   return result.failed("没有符合条件的新闻");
+               }
+
         }
         catch (Exception e){
             e.printStackTrace();
@@ -36,107 +87,90 @@ public class NewsControl {
     }
 
 
-    @PostMapping(value = "insertNews")
-    @ResponseBody
-    public void insertNews(NewsDo newsDo){
-        try{
-            newsService.insertNews(newsDo);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    @DeleteMapping(value = "deleteNews")
-    @ResponseBody
-    public void deleteNews(int news_id){
-        try{
-            newsService.deleteNews(news_id);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
-    @PostMapping(value = "updateNews")
-    @ResponseBody
-    public void updateNews(NewsDo newsDo){
-        try{
-            newsService.updateNews(newsDo);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
-    @PostMapping(value = "getAllNews")
-    @ResponseBody
-    public List getAllNews(){
-        List<NewsDo> newsDoList = new ArrayList();
-        try{
-            newsDoList = newsService.getAllNews();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return  newsDoList;
-
-    }
-
-
     @PostMapping(value = "getNewsById")
     @ResponseBody
-    public List<NewsDo> getNewsById(@RequestParam int news_id){
+    public Result getNewsById( @RequestParam int news_id){
 
         List<NewsDo> newsDoList = new ArrayList();
+        Result result =new Result() ;
         try{
             newsDoList = newsService.getNewsById(news_id);
+            if(newsDoList!=null && !newsDoList.isEmpty())
+            {
+                return result.success(newsDoList);
+            }else
+            {
+                return result.failed("没有符合条件的新闻");
+            }
+
         }
         catch (Exception e){
             e.printStackTrace();
+            return result.failed();
         }
-        return  newsDoList;
     }
 
     @PostMapping(value = "getNewsByDate")
     @ResponseBody
-    public List<NewsDo> getNewsByDate(@RequestParam Date news_date){
+    public Result getNewsByDate(@RequestParam Date news_date){
         List<NewsDo> newsDoList = new ArrayList();
+        Result result =new Result() ;
         try{
             newsDoList = newsService.getNewsByDate(news_date);
+            if(newsDoList!=null && !newsDoList.isEmpty())
+            {
+                return result.success(newsDoList);
+            }else
+            {
+                return result.failed("没有符合条件的新闻");
+            }
         }
         catch (Exception e){
             e.printStackTrace();
+            return result.failed();
         }
-        return  newsDoList;
     }
 
     @PostMapping(value = "getNewsByTitle")
     @ResponseBody
-    public List<NewsDo> getNewsByTitle(String news_title){
+    public Result getNewsByTitle(String news_title){
         List<NewsDo> newsDoList = new ArrayList();
+        Result result =new Result() ;
         try{
             newsDoList = newsService.getNewsByTitle(news_title);
+            if(newsDoList!=null && !newsDoList.isEmpty())
+            {
+                return result.success(newsDoList);
+            }else
+            {
+                return result.failed("没有符合条件的新闻");
+            }
         }
         catch (Exception e){
             e.printStackTrace();
+            return result.failed();
         }
-        return  newsDoList;
     }
 
     @PostMapping(value = "getNewsByState")
     @ResponseBody
-    public List<NewsDo> getNewsByState(int news_state){
+    public Result getNewsByState(int news_state){
         List<NewsDo> newsDoList = new ArrayList();
+        Result result =new Result() ;
         try{
             newsDoList = newsService.getNewsByState(news_state);
+            if(newsDoList!=null && !newsDoList.isEmpty())
+            {
+                return result.success(newsDoList);
+            }else
+            {
+                return result.failed("没有符合条件的新闻");
+            }
         }
         catch (Exception e){
             e.printStackTrace();
+            return result.failed();
         }
-        return  newsDoList;
     }
 
 
