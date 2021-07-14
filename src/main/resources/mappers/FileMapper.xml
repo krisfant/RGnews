@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="com.woodmoon.mapping.userMapper"就是com.woodmoon.mapping(包名)+NewsMapper(NewsMapper.xml文件去除后缀)-->
+<mapper namespace="com.rgnews.dao.FilesMapperDao">
+
+
+    <resultMap id="FileMap" type="com.rgnews.model.FileDo">
+        <id property="file_id" column="file_id" javaType="java.lang.Integer"></id>
+        <result property="file_type" column="file_type" javaType="java.lang.Integer"></result>
+        <result property="update_time" column="update_time" javaType="date"></result>
+        <result property="file_name" column="file_name" javaType="java.lang.String"></result>
+        <result property="file_url" column="file_url" javaType="java.lang.String"></result>
+    </resultMap>
+
+
+
+
+    <!--上传文件-->
+    <insert id="insertFile" useGeneratedKeys="true" keyProperty="file_id">
+        insert into test_files(file_type,update_time,file_name,file_url) values (#{file_type},#{update_time},#{file_name},#{file_url})
+    </insert>
+<!--删除-->
+    <delete id="deleteFile" parameterType="int">
+        delete from test_files where file_id=#{file_id}
+    </delete>
+<!--    文件列表-->
+    <select id="fileList" resultMap="FileMap">
+        select * from test_files
+    </select>
+<!--按ID查找-->
+    <select id="getFileById" parameterType="int" resultType="com.rgnews.model.FileDo">
+        select * from test_files where file_id=#{file_id}
+    </select>
+
+
+
+</mapper>

@@ -38,9 +38,6 @@
 
 
     <!--    查询所有新闻-->
-    <select id="test" resultType="com.rgnews.model.NewsDo">
-        select * from test_news where news_id='1'
-    </select>
 
     <select id="getAllNews" resultMap="NewsMap">
         select * from test_news

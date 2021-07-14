@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单文件上传</title>
+</head>
+<body>
+<p>单文件上传</p>
+<form method="POST" enctype="multipart/form-data" action="/cms/upload" >
+    文件：<input type="file" name="file"/>
+    类型：<select name="file_type">
+    <option value =0 selected="selected">未分类</option>
+    <option value =1>图片</option>
+    <option value =2>文档</option>
+    <br>
+</select>
+    <input type="submit"/>
+</form>
+<hr/>
+</body>
+</html>
