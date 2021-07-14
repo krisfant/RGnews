@@ -172,7 +172,7 @@ public class FileController {
     }
 
 
-    @GetMapping("/downloadfile")
+    @GetMapping("/downloadFile")
     @ResponseBody
     public Result downloadFile(HttpServletRequest request, HttpServletResponse response,int file_id) throws UnsupportedEncodingException {
 
