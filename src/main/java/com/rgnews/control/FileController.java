@@ -2,7 +2,8 @@ package com.rgnews.control;
 import com.rgnews.model.FileDo;
 import com.rgnews.model.Result;
 import com.rgnews.service.FileService;
-import com.sun.deploy.net.URLEncoder;
+//import com.sun.deploy.net.URLEncoder;
+import java.net.URLEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,7 +144,6 @@ public class FileController {
             {
                 return Result.failed("未找到记录");
             }
-
         }
         catch (Exception e){
             e.printStackTrace();
@@ -175,9 +175,10 @@ public class FileController {
     @GetMapping("/downloadfile")
     @ResponseBody
     public Result downloadFile(HttpServletRequest request, HttpServletResponse response,int file_id) throws UnsupportedEncodingException {
+
+
+
         FileDo fileDo = fileService.getFileById(file_id);
-
-
         if (fileDo!=null) {
             String fileName = fileDo.getFile_name();// 文件名
             //设置文件路径
@@ -200,7 +201,6 @@ public class FileController {
                         os.write(buffer, 0, i);
                         i = bis.read(buffer);
                     }
-                    return Result.success();
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -219,10 +219,28 @@ public class FileController {
                         }
                     }
                 }
+                return Result.success();
             }
+            return Result.failed("没有对应的文件");
         }
-        return Result.failed("没有对应的文件");
+        else {
+            return Result.failed("没有对应的文件");
+        }
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
 
 
 }
