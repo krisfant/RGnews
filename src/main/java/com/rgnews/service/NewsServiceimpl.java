@@ -6,6 +6,7 @@ import com.rgnews.model.NewsDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,8 +22,10 @@ public class NewsServiceimpl implements NewsService{
 
     @Override
     public void insertNews(NewsDo newsDo){
-        Date date = new Date();
-        newsDo.setUpdate_time(date);
+        newsDo.setNews_state(1);
+        String nowtime = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date());
+        newsDo.setUpdate_time(nowtime);
+
         newsMapper.insertNews(newsDo);
     }
 
@@ -34,8 +37,8 @@ public class NewsServiceimpl implements NewsService{
 
     @Override
     public void updateNews(NewsDo newsDo) {
-        Date date = new Date();
-        newsDo.setUpdate_time(date);
+        String nowtime = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(new Date());
+        newsDo.setUpdate_time(nowtime);
         newsMapper.updateNews(newsDo);
     }
 

@@ -9,13 +9,12 @@ import java.util.Date;
 @Data
 @Setter
 @Getter
-public class NewsDo {
-
+public class QueryNewsDo {
     private int news_id;
     private int news_state;
-    private Date news_date;
-    private String update_time;
+    private Date start_time;
+    private Date edd_time;
     private String news_title;
-    private String news_content;
-    private String news_photo;
+
+    private int queryMode;
 }

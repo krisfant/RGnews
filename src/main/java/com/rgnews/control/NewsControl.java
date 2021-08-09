@@ -162,4 +162,23 @@ public class NewsControl {
             return Result.failed();
         }
     }
+    @PostMapping(value = "queryNews")
+    @ResponseBody
+    public Result queryNews(int news_state){
+        List<NewsDo> newsDoList;
+        try{
+            newsDoList = newsService.getNewsByState(news_state);
+            if(newsDoList!=null && !newsDoList.isEmpty())
+            {
+                return Result.success(newsDoList);
+            }else
+            {
+                return Result.failed("没有符合条件的新闻");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return Result.failed();
+        }
+    }
 }

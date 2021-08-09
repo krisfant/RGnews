@@ -33,17 +33,17 @@ public class FileController {
      */
     @RequestMapping("/upload")
     public String singleFile() {
-        return "/upload";
+        return "upload";
     }
 
-    /**
-     * 跳转上传多文件页面
-     * @return
-     */
-    @RequestMapping("/uploadBatch")
-    public String multipleFiles() {
-        return "/uploadBatch";
-    }
+//    /**
+//     * 跳转上传多文件页面
+//     * @return
+//     */
+//    @RequestMapping("/uploadBatch")
+//    public String multipleFiles() {
+//        return "/uploadBatch";
+//    }
 
 
     /**
@@ -74,6 +74,10 @@ public class FileController {
             logger.info("[文件大小] - [{}]",file.getSize());
             logger.info(this.getClass().getName()+"图片路径："+path);
 
+            //文件名增加时间戳
+//            file.setO
+//            System.currentTimeMillis()
+
             File f = new File(path);
             // 如果不存在该路径就创建
             if (!f.exists()) {
@@ -91,7 +95,7 @@ public class FileController {
             fileDo.setFile_type(file_type);
             fileDo.setFile_url(path+file.getOriginalFilename());
             fileService.insertFile(fileDo);
-            return Result.success("文件已上传");
+            return Result.success(path+file.getOriginalFilename(),"文件已上传");
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failed("上传失败");
@@ -168,7 +172,7 @@ public class FileController {
 
     @RequestMapping("/download")
     public String DownLoadSingleFile() {
-        return "/download";
+        return "download";
     }
 
 
