@@ -100,11 +100,11 @@ public class FileController {
             FileDo fileDo = new FileDo();
             Date date = new Date();
             fileDo.setUpdate_time(date);
-            fileDo.setFile_name(file.getOriginalFilename());
+            fileDo.setFile_name(newFileName);
             fileDo.setFile_type(file_type);
-            fileDo.setFile_url(path+file.getOriginalFilename());
+            fileDo.setFile_url(path+newFileName);
             fileService.insertFile(fileDo);
-            return Result.success(path+file.getOriginalFilename(),"文件已上传");
+            return Result.success(path+newFileName,"文件已上传");
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failed("上传失败");
@@ -168,14 +168,20 @@ public class FileController {
     @DeleteMapping(value = "deleteFile")
     @ResponseBody
     public Result deleteNews(int file_id){
-        try{
-            fileService.deleteFile(file_id);
-            return Result.success();
+        FileDo dfdo = fileService.getFileById(file_id);
+        if(dfdo!=null){
+            try{
+                File df = new File(dfdo.getFile_url());
+                df.delete();
+                fileService.deleteFile(file_id);
+                return Result.success();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                return Result.failed();
+            }
         }
-        catch (Exception e){
-            e.printStackTrace();
-            return Result.failed();
-        }
+       return Result.failed("数据库内没有该记录");
 
     }
 
