@@ -54,7 +54,7 @@ public class FileController {
      * @param file
      * @return
      */
-    @PostMapping("/upload")
+    @PostMapping("/uploadFile")
     @ResponseBody
     public Result upload(@RequestParam("file") MultipartFile file, @RequestParam("file_type")int file_type) {
         //判断非空
@@ -191,11 +191,9 @@ public class FileController {
     }
 
 
-    @GetMapping("/downloadFile")
+    @PostMapping("/downloadFile")
     @ResponseBody
     public Result downloadFile(HttpServletRequest request, HttpServletResponse response,int file_id) throws UnsupportedEncodingException {
-
-
 
         FileDo fileDo = fileService.getFileById(file_id);
         if (fileDo!=null) {
@@ -245,14 +243,6 @@ public class FileController {
         else {
             return Result.failed("没有对应的文件");
         }
-
-
-
-
-
-
-
-
     }
 
 
