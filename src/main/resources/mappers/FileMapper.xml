@@ -27,7 +27,7 @@
     </delete>
 <!--    文件列表-->
     <select id="fileList" resultMap="FileMap">
-        select * from test_files
+        select * from test_files order by update_time desc
     </select>
 <!--按ID查找-->
     <select id="getFileById" parameterType="int" resultType="com.rgnews.model.FileDo">
