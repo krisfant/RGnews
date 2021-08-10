@@ -4,6 +4,8 @@ import com.rgnews.model.Result;
 import com.rgnews.service.FileService;
 //import com.sun.deploy.net.URLEncoder;
 import java.net.URLEncoder;
+
+import com.rgnews.util.NameUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -74,16 +77,22 @@ public class FileController {
             logger.info("[文件大小] - [{}]",file.getSize());
             logger.info(this.getClass().getName()+"图片路径："+path);
 
+            // 获取文件名称
+            String fileName = file.getOriginalFilename();
+            // 获取文件后缀
+            String suffixName = fileName.substring(fileName.lastIndexOf("."));
             //文件名增加时间戳
-//            file.setO
-//            System.currentTimeMillis()
+            NameUtil nameUtil = new NameUtil();
+            String nowtime = new SimpleDateFormat("YYYYMMddHHmmss").format(new Date());
+            String newFileName =nameUtil.getFileNameNoEx(fileName)+nowtime+suffixName;
+
 
             File f = new File(path);
             // 如果不存在该路径就创建
             if (!f.exists()) {
                 f.mkdir();
             }
-            File dir = new File(path + file.getOriginalFilename());
+            File dir = new File(path + newFileName);
             // 文件写入
             file.transferTo(dir);
             // 这里除了transferTo方法，也可以用字节流的方式上传文件，但是字节流比较慢，所以还是建议用transferTo
