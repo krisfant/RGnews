@@ -25,7 +25,7 @@ public interface NewsMapperDao {
     List<NewsDo> getAllNews();
     //根据条件查询
     List<NewsDo> getNewsById(int news_id);
-    List<NewsDo> getNewsByDate(Date news_date);
+    List<NewsDo> getNewsByTime(String start_time,String end_time);
     List<NewsDo> getNewsByTitle(String news_title);//模糊查询
     List<NewsDo> getNewsByState(int news_state);
 

@@ -40,15 +40,15 @@
     <!--    查询所有新闻-->
 
     <select id="getAllNews" resultMap="NewsMap">
-        select * from test_news
+        select * from test_news order by update_time DESC
     </select>
     <!-- 创建对应news实体类的位置 -->
     <!-- 根据条件查询得到一个news对象-->
     <select id="getNewsById" parameterType="int" resultType="com.rgnews.model.NewsDo">
         select * from test_news where news_id=#{news_id}
     </select>
-    <select id="getNewsByDate" parameterType="date" resultType="com.rgnews.model.NewsDo">
-        select * from test_news where DATE_FORMAT(news_date,'%Y-%m-%d') = '2021-06-03'
+    <select id="getNewsByTime" parameterType="String" resultType="com.rgnews.model.NewsDo">
+        select * from test_news where update_time >= #{start_time} and update_time <![CDATA[<=]]>#{end_time}
     </select>
     <select id="getNewsByTitle" parameterType="String" resultType="com.rgnews.model.NewsDo">
         select * from test_news where news_title like CONCAT('%',#{news_title},'%')

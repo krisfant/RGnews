@@ -56,8 +56,8 @@ public class NewsServiceimpl implements NewsService{
     }
 
     @Override
-    public List<NewsDo> getNewsByDate(Date news_date){
-        newsList = newsMapper.getNewsByDate(news_date);
+    public List<NewsDo> getNewsByTime(String start_time,String end_time){
+        newsList = newsMapper.getNewsByTime(start_time,end_time);
         return  newsList;
     }
 
