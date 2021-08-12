@@ -79,7 +79,7 @@ public class NewsControl {
 
             sql.append(" order by update_time");
             int rank=newsDo.getRank();
-            if(rank>0){
+            if(rank == 0){
                 sql.append(" desc");
             }
 
