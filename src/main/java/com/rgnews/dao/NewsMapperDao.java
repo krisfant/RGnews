@@ -19,7 +19,7 @@ public interface NewsMapperDao {
     void deleteNews(int news_id);
 
     //改
-    void updateNews(NewsDo newsDo);
+    void updateNews(String sql);
 
     //查询所有
     List<NewsDo> queryNews(String sql);

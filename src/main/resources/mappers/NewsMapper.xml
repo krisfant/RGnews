@@ -9,7 +9,7 @@
     <resultMap id="NewsMap" type="com.rgnews.model.NewsDo">
         <id property="news_id" column="news_id" javaType="java.lang.Integer"></id>
         <result property="news_state" column="news_state" javaType="java.lang.Integer"></result>
-        <result property="news_date" column="news_date" javaType="date"></result>
+        <result property="update_time" column="update_time" javaType="java.lang.String"></result>
         <result property="news_title" column="news_title" javaType="java.lang.String"></result>
         <result property="news_content" column="news_content" javaType="java.lang.String"></result>
         <result property="news_photo" column="news_photo" javaType="java.lang.String"></result>
@@ -30,8 +30,7 @@
 
     <!--修改新闻-->
     <update id="updateNews" parameterType="Map">
-        update test_news set news_state=#{news_state},news_date=#{news_date},news_title=#{news_title},news_content=#{news_content},news_photo=#{news_photo}
-        where news_id=#{news_id}
+        ${sql}
     </update>
 
 

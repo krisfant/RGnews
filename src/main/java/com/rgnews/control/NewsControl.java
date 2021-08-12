@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -50,8 +51,33 @@ public class NewsControl {
     @ResponseBody
     public Result updateNews(NewsDo newsDo){
         try{
-            newsService.updateNews(newsDo);
-            return Result.success();
+            if(newsDo != null){
+                StringBuilder sql = new StringBuilder(" update test_news set");
+
+                String nowtime = new SimpleDateFormat("YYYY-MM-dd").format(new Date());
+                sql.append(" update_time="+"\'"+nowtime+"\'");
+
+                if(newsDo.getNews_state() > 0){
+                    sql.append(",news_state="+ newsDo.getNews_state());
+                }
+                if(newsDo.getNews_title() != null && !newsDo.getNews_title().isEmpty()){
+                    sql.append(",news_title="+"\'"+newsDo.getNews_title()+"\'");
+                }
+                if(newsDo.getNews_content() != null && !newsDo.getNews_content().isEmpty()){
+                    sql.append(",news_content="+"\'"+newsDo.getNews_content()+"\'");
+                }
+                if(newsDo.getNews_photo() != null && !newsDo.getNews_photo().isEmpty()){
+                    sql.append(",news_photo="+"\'"+newsDo.getNews_photo()+"\'");
+                }
+
+                sql.append(" where news_id="+newsDo.getNews_id());
+
+                newsService.updateNews(sql.toString());
+                return Result.success();
+            }else{
+                return Result.success("更新参数为空");
+            }
+
         }
         catch (Exception e){
             e.printStackTrace();

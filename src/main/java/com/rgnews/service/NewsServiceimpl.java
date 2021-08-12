@@ -20,7 +20,7 @@ public class NewsServiceimpl implements NewsService{
     @Override
     public void insertNews(NewsDo newsDo){
         newsDo.setNews_state(1);
-        String nowtime = new SimpleDateFormat("YYYY-MM-DD").format(new Date());
+        String nowtime = new SimpleDateFormat("YYYY-MM-dd").format(new Date());
         newsDo.setUpdate_time(nowtime);
 
         newsMapper.insertNews(newsDo);
@@ -33,10 +33,8 @@ public class NewsServiceimpl implements NewsService{
     }
 
     @Override
-    public void updateNews(NewsDo newsDo) {
-        String nowtime = new SimpleDateFormat("YYYY-MM-DD").format(new Date());
-        newsDo.setUpdate_time(nowtime);
-        newsMapper.updateNews(newsDo);
+    public void updateNews(String sql) {
+        newsMapper.updateNews(sql);
     }
 
 
