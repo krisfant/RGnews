@@ -2,7 +2,8 @@ server:
   port: 8080
   servlet:
     context-path: /cms
-logging:
+  max-http-header-size: 102400
+  logging:
   file: log.log
 spring:
 #  mvc:
