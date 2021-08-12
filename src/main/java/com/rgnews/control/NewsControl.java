@@ -75,7 +75,7 @@ public class NewsControl {
             if(queryState>0){ sql.append(" and news_state ="+queryState); }
 
             String queryTitle = newsDo.getNews_title();
-            if(queryTitle != null && !queryTitle.trim().isEmpty()){ sql.append(" and cname like"+queryTitle); }
+            if(queryTitle != null && !queryTitle.trim().isEmpty()){ sql.append(" and news_title like "+"\'%"+queryTitle+"%\'"); }
 
             sql.append(" order by update_time");
             int rank=newsDo.getRank();
