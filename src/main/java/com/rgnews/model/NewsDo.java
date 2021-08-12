@@ -19,7 +19,7 @@ public class NewsDo {
     private String news_title;
     private String news_content;
     private String news_photo;
-    private int queryType;
+    private int rank;
     //queryType默认为查询所有
 //    1:int news_id
 //    2:int news_state

@@ -112,37 +112,37 @@ public class FileController {
     }
 
 
-    @PostMapping("/uploadBatch")
-    @ResponseBody
-    public String uploadBatch(@RequestParam("files") MultipartFile[] files) {
-        logger.info("文件名称："+ files );
-        if(files!=null&&files.length>0){
-            String filePath = "D:\\datafile\\";
-            for (MultipartFile mf : files) {
-                // 获取文件名称
-                String fileName = mf.getOriginalFilename();
-                // 获取文件后缀
-                String suffixName = fileName.substring(fileName.lastIndexOf("."));
-                // 重新生成文件名
-                fileName = UUID.randomUUID()+suffixName;
-
-                if (mf.isEmpty()) {
-                    return "文件名称："+ fileName +"上传失败，原因是文件为空!";
-                }
-                File dir = new File(filePath + fileName);
-                try {
-                    // 写入文件
-                    mf.transferTo(dir);
-                    logger.info("文件名称："+ fileName +"上传成功");
-                } catch (IOException e) {
-                    logger.error(e.toString(), e);
-                    return "文件名称："+ fileName +"上传失败";
-                }
-            }
-            return "多文件上传成功";
-        }
-        return "上传文件不能为空";
-    }
+//    @PostMapping("/uploadBatch")
+//    @ResponseBody
+//    public String uploadBatch(@RequestParam("files") MultipartFile[] files) {
+//        logger.info("文件名称："+ files );
+//        if(files!=null&&files.length>0){
+//            String filePath = "D:\\datafile\\";
+//            for (MultipartFile mf : files) {
+//                // 获取文件名称
+//                String fileName = mf.getOriginalFilename();
+//                // 获取文件后缀
+//                String suffixName = fileName.substring(fileName.lastIndexOf("."));
+//                // 重新生成文件名
+//                fileName = UUID.randomUUID()+suffixName;
+//
+//                if (mf.isEmpty()) {
+//                    return "文件名称："+ fileName +"上传失败，原因是文件为空!";
+//                }
+//                File dir = new File(filePath + fileName);
+//                try {
+//                    // 写入文件
+//                    mf.transferTo(dir);
+//                    logger.info("文件名称："+ fileName +"上传成功");
+//                } catch (IOException e) {
+//                    logger.error(e.toString(), e);
+//                    return "文件名称："+ fileName +"上传失败";
+//                }
+//            }
+//            return "多文件上传成功";
+//        }
+//        return "上传文件不能为空";
+//    }
 
     @PostMapping("/fileList")
     @ResponseBody

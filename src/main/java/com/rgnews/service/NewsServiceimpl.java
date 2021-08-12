@@ -17,9 +17,6 @@ public class NewsServiceimpl implements NewsService{
     @Autowired
     NewsMapperDao newsMapper;
 
-
-    List newsList = new ArrayList();
-
     @Override
     public void insertNews(NewsDo newsDo){
         newsDo.setNews_state(1);
@@ -44,33 +41,10 @@ public class NewsServiceimpl implements NewsService{
 
 
     @Override
-    public List<NewsDo> getAllNews(){
-        newsList = newsMapper.getAllNews();
+    public List<NewsDo> queryNews(String sql){
+        List newsList = newsMapper.queryNews(sql);
         return  newsList;
     }
 
-    @Override
-    public List<NewsDo> getNewsById(int news_id){
-        newsList = newsMapper.getNewsById(news_id);
-        return  newsList;
-    }
-
-    @Override
-    public List<NewsDo> getNewsByTime(String start_time,String end_time){
-        newsList = newsMapper.getNewsByTime(start_time,end_time);
-        return  newsList;
-    }
-
-    @Override
-    public List<NewsDo> getNewsByTitle(String news_title){
-        newsList = newsMapper.getNewsByTitle(news_title);
-        return  newsList;
-    }
-
-    @Override
-    public List<NewsDo> getNewsByState(int news_state){
-        newsList = newsMapper.getNewsByState(news_state);
-        return  newsList;
-    }
 
 }

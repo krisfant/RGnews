@@ -5,6 +5,8 @@ import com.rgnews.model.Result;
 import com.rgnews.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -61,182 +63,43 @@ public class NewsControl {
 
     @PostMapping(value = "queryNews")
     @ResponseBody
-    public Result queryNews(NewsDo newsDo){
+    public Result queryNews(NewsDo newsDo) {
         List<NewsDo> newsDoList;
-        int queryType = newsDo.getQueryType();
-        switch (queryType){
-            case 1:
-                try{
-                    newsDoList = newsService.getNewsById(newsDo.getNews_id());
-                    if(newsDoList!=null && !newsDoList.isEmpty())
-                    { return Result.success(newsDoList);}
-                    else
-                    { return Result.failed("没有符合条件的新闻"); }
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                    return Result.failed();
-                }
+        try{
+            StringBuilder sql =new StringBuilder("select * from test_news where 1=1");
 
-            case 2:
-                try{
-                    newsDoList = newsService.getNewsByState(newsDo.getNews_state());
-                    if(newsDoList!=null && !newsDoList.isEmpty())
-                    { return Result.success(newsDoList);}
-                    else
-                    { return Result.failed("没有符合条件的新闻"); }
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                    return Result.failed();
-                }
-            case 3:
-                try{
-                    newsDoList = newsService.getNewsByTitle(newsDo.getNews_title());
-                    if(newsDoList!=null && !newsDoList.isEmpty())
-                    { return Result.success(newsDoList);}
-                    else
-                    { return Result.failed("没有符合条件的新闻"); }
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                    return Result.failed();
-                }
-            case 4:
-                try{
-                    newsDoList = newsService.getNewsByTime(newsDo.getStart_time(),newsDo.getEnd_time());
-                    if(newsDoList!=null && !newsDoList.isEmpty())
-                    { return Result.success(newsDoList);}
-                    else
-                    { return Result.failed("没有符合条件的新闻"); }
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                    return Result.failed();
-                }
-            default:
-                try{
-                    newsDoList = newsService.getAllNews();
-                    if(newsDoList!=null && !newsDoList.isEmpty())
-                    { return Result.success(newsDoList); }
-                    else
-                    { return Result.failed("没有符合条件的新闻"); }
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                    return Result.failed();
-                }
+            int queryId=newsDo.getNews_id();
+            if(queryId>0){ sql.append(" and news_id ="+queryId); }
+
+            int queryState=newsDo.getNews_state();
+            if(queryState>0){ sql.append(" and news_state ="+queryState); }
+
+            String queryTitle = newsDo.getNews_title();
+            if(queryTitle != null && !queryTitle.trim().isEmpty()){ sql.append(" and cname like"+queryTitle); }
+
+            sql.append(" order by update_time");
+            int rank=newsDo.getRank();
+            if(rank>0){
+                sql.append(" desc");
+            }
+
+            newsDoList = newsService.queryNews(sql.toString());
+            if(newsDoList!=null && !newsDoList.isEmpty())
+            {
+                return Result.success(newsDoList);
+            }
+            else {
+                return Result.success("未查询到任何结果");
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return Result.failed("查询失败");
         }
+
+
+
     }
-
-
-
-//    @PostMapping(value = "getAllNews")
-//    @ResponseBody
-//    public Result getAllNews(){
-//        List<NewsDo> newsDoList;
-//        try{
-//            newsDoList = newsService.getAllNews();
-//            if(newsDoList!=null && !newsDoList.isEmpty())
-//               {
-//                   return Result.success(newsDoList);
-//               }else
-//               {
-//                   return Result.failed("没有符合条件的新闻");
-//               }
-//
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//            return Result.failed();
-//        }
-//
-//    }
-//
-//
-//    @PostMapping(value = "getNewsById")
-//    @ResponseBody
-//    public Result getNewsById( @RequestParam int news_id){
-//
-//        List<NewsDo> newsDoList;
-//        try{
-//            newsDoList = newsService.getNewsById(news_id);
-//            if(newsDoList!=null && !newsDoList.isEmpty())
-//            {
-//                return Result.success(newsDoList);
-//            }else
-//            {
-//                return Result.failed("没有符合条件的新闻");
-//            }
-//
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//            return Result.failed();
-//        }
-//    }
-//
-//    @PostMapping(value = "getNewsByDate")
-//    @ResponseBody
-//    public Result getNewsByDate(@RequestParam Date news_date){
-//        List<NewsDo> newsDoList;
-//        try{
-//            newsDoList = newsService.getNewsByDate(news_date);
-//            if(newsDoList!=null && !newsDoList.isEmpty())
-//            {
-//                return Result.success(newsDoList);
-//            }else
-//            {
-//                return Result.failed("没有符合条件的新闻");
-//            }
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//            return Result.failed();
-//        }
-//    }
-//
-//    @PostMapping(value = "getNewsByTitle")
-//    @ResponseBody
-//    public Result getNewsByTitle(String news_title){
-//        List<NewsDo> newsDoList ;
-//        try{
-//            newsDoList = newsService.getNewsByTitle(news_title);
-//            if(newsDoList!=null && !newsDoList.isEmpty())
-//            {
-//                return Result.success(newsDoList);
-//            }else
-//            {
-//                return Result.failed("没有符合条件的新闻");
-//            }
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//            return Result.failed();
-//        }
-//    }
-//
-//    @PostMapping(value = "getNewsByState")
-//    @ResponseBody
-//    public Result getNewsByState(int news_state){
-//        List<NewsDo> newsDoList;
-//        try{
-//            newsDoList = newsService.getNewsByState(news_state);
-//            if(newsDoList!=null && !newsDoList.isEmpty())
-//            {
-//                return Result.success(newsDoList);
-//            }else
-//            {
-//                return Result.failed("没有符合条件的新闻");
-//            }
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//            return Result.failed();
-//        }
-//    }
-
-
 
 
 }

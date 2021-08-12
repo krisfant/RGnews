@@ -35,26 +35,28 @@
     </update>
 
 
+    <select id="queryNews" parameterType="String" resultMap="NewsMap">
+        ${sql}
+    </select>
 
+<!--    &lt;!&ndash;    查询所有新闻&ndash;&gt;-->
 
-    <!--    查询所有新闻-->
-
-    <select id="getAllNews" resultMap="NewsMap">
-        select * from test_news order by update_time desc
-    </select>
-    <!-- 创建对应news实体类的位置 -->
-    <!-- 根据条件查询得到一个news对象-->
-    <select id="getNewsById" parameterType="int" resultType="com.rgnews.model.NewsDo">
-        select * from test_news where news_id=#{news_id}
-    </select>
-    <select id="getNewsByTime" parameterType="String" resultType="com.rgnews.model.NewsDo">
-        select * from test_news where update_time >= #{start_time} and update_time <![CDATA[<=]]>#{end_time}
-    </select>
-    <select id="getNewsByTitle" parameterType="String" resultType="com.rgnews.model.NewsDo">
-        select * from test_news where news_title like CONCAT('%',#{news_title},'%')
-    </select>
-    <select id="getNewsByState" parameterType="int" resultType="com.rgnews.model.NewsDo">
-        select * from test_news where news_state=#{news_state}
-    </select>
+<!--    <select id="getAllNews" resultMap="NewsMap">-->
+<!--        select * from test_news order by update_time desc-->
+<!--    </select>-->
+<!--    &lt;!&ndash; 创建对应news实体类的位置 &ndash;&gt;-->
+<!--    &lt;!&ndash; 根据条件查询得到一个news对象&ndash;&gt;-->
+<!--    <select id="getNewsById" parameterType="int" resultType="com.rgnews.model.NewsDo">-->
+<!--        select * from test_news where news_id=#{news_id}-->
+<!--    </select>-->
+<!--    <select id="getNewsByTime" parameterType="String" resultType="com.rgnews.model.NewsDo">-->
+<!--        select * from test_news where update_time >= #{start_time} and update_time <![CDATA[<=]]>#{end_time}-->
+<!--    </select>-->
+<!--    <select id="getNewsByTitle" parameterType="String" resultType="com.rgnews.model.NewsDo">-->
+<!--        select * from test_news where news_title like CONCAT('%',#{news_title},'%')-->
+<!--    </select>-->
+<!--    <select id="getNewsByState" parameterType="int" resultType="com.rgnews.model.NewsDo">-->
+<!--        select * from test_news where news_state=#{news_state}-->
+<!--    </select>-->
 
 </mapper>
