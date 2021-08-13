@@ -20,7 +20,7 @@
 
     <!--新增新闻-->
     <insert id="insertNews" useGeneratedKeys="true" keyProperty="news_id">
-        insert into test_news (news_state,update_time,news_title,news_content,news_photo) values (#{news_state},#{update_time},#{news_title},#{news_content},#{news_photo})
+        insert into test_news (news_state,create_time,news_title,news_content,news_photo) values (#{news_state},#{create_time},#{news_title},#{news_content},#{news_photo})
     </insert>
 
     <!--删除新闻-->

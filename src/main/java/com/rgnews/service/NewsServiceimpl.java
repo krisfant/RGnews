@@ -21,7 +21,7 @@ public class NewsServiceimpl implements NewsService{
     public void insertNews(NewsDo newsDo){
         newsDo.setNews_state(1);
         String nowtime = new SimpleDateFormat("YYYY-MM-dd").format(new Date());
-        newsDo.setUpdate_time(nowtime);
+        newsDo.setCreate_time(nowtime);
 
         newsMapper.insertNews(newsDo);
     }

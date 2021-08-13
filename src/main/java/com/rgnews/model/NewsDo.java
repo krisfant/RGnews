@@ -12,6 +12,7 @@ import java.util.Date;
 public class NewsDo {
     private int news_id;
     private int news_state;
+    private String create_time;
     private String update_time;
     private String news_title;
     private String news_content;
