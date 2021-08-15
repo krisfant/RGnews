@@ -83,7 +83,7 @@ public class FileController {
             String suffixName = fileName.substring(fileName.lastIndexOf("."));
             //文件名增加时间戳
             NameUtil nameUtil = new NameUtil();
-            String nowtime = new SimpleDateFormat("YYYY-MM-dd").format(new Date());
+            String nowtime = new SimpleDateFormat("YYYYMMddHHmmss").format(new Date());
             String newFileName =nameUtil.getFileNameNoEx(fileName)+nowtime+suffixName;
 
 
@@ -98,8 +98,8 @@ public class FileController {
             // 这里除了transferTo方法，也可以用字节流的方式上传文件，但是字节流比较慢，所以还是建议用transferTo
 //            writeFile(file);
             FileDo fileDo = new FileDo();
-            Date date = new Date();
-            fileDo.setUpdate_time(date);
+            String upload_time = new SimpleDateFormat("YYYY-MM-DD").format(new Date());
+            fileDo.setUpdate_time(upload_time);
             fileDo.setFile_name(newFileName);
             fileDo.setFile_type(file_type);
             fileDo.setFile_url(path+newFileName);

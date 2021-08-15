@@ -11,7 +11,7 @@ import java.util.Date;
 @Setter
 public class FileDo {
     private String file_name;
-    private Date update_time;
+    private String update_time;
     private int file_id;
     private int file_type;
     private String file_url;
