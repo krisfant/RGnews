@@ -83,7 +83,7 @@ public class FileController {
             String suffixName = fileName.substring(fileName.lastIndexOf("."));
             //文件名增加时间戳
             NameUtil nameUtil = new NameUtil();
-            String nowtime = new SimpleDateFormat("YYYYMMddHHmmss").format(new Date());
+            String nowtime = new SimpleDateFormat("YYYY-MM-dd").format(new Date());
             String newFileName =nameUtil.getFileNameNoEx(fileName)+nowtime+suffixName;
 
 
