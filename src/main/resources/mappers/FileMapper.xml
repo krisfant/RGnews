@@ -9,7 +9,7 @@
     <resultMap id="FileMap" type="com.rgnews.model.FileDo">
         <id property="file_id" column="file_id" javaType="java.lang.Integer"></id>
         <result property="file_type" column="file_type" javaType="java.lang.Integer"></result>
-        <result property="update_time" column="update_time" javaType="date"></result>
+        <result property="update_time" column="update_time" javaType="java.lang.String"></result>
         <result property="file_name" column="file_name" javaType="java.lang.String"></result>
         <result property="file_url" column="file_url" javaType="java.lang.String"></result>
     </resultMap>
