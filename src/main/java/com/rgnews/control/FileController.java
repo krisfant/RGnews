@@ -102,12 +102,12 @@ public class FileController {
             fileDo.setUpdate_time(upload_time);
             fileDo.setFile_name(newFileName);
             fileDo.setFile_type(file_type);
-            fileDo.setFile_url("1.117.1.162/other/"+newFileName);
+            fileDo.setFile_url("1.117.1.162:81/other/"+newFileName);
             if(file_type == 1){
-                fileDo.setFile_url("1.117.1.162/pic/"+newFileName);
+                fileDo.setFile_url("1.117.1.162:81/pic/"+newFileName);
             }
             if(file_type == 2){
-                fileDo.setFile_url("1.117.1.162/doc/"+newFileName);
+                fileDo.setFile_url("1.117.1.162:81/doc/"+newFileName);
             }
 
             fileService.insertFile(fileDo);
