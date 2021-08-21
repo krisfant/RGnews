@@ -102,16 +102,16 @@ public class FileController {
             fileDo.setUpdate_time(upload_time);
             fileDo.setFile_name(newFileName);
             fileDo.setFile_type(file_type);
-            fileDo.setFile_url("1.117.1.162:81/other/"+newFileName);
+            fileDo.setFile_url("http://1.117.1.162:81/other/"+newFileName);
             if(file_type == 1){
-                fileDo.setFile_url("1.117.1.162:81/pic/"+newFileName);
+                fileDo.setFile_url("http://1.117.1.162:81/pic/"+newFileName);
             }
             if(file_type == 2){
-                fileDo.setFile_url("1.117.1.162:81/doc/"+newFileName);
+                fileDo.setFile_url("http://1.117.1.162:81/doc/"+newFileName);
             }
 
             fileService.insertFile(fileDo);
-            return Result.success(path+newFileName,"文件已上传");
+            return Result.success(fileDo.getFile_url(),"文件已上传");
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failed("上传失败");
